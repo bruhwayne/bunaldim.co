@@ -1,0 +1,48 @@
+body {
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.content-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    color: var(--renk-soluk-yazi);
+    margin: 1rem 0 2.5rem 0;
+    max-width: 600px;
+}
+
+.action-button {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--renk-vurgu);
+    color: white;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3); 
+}
+
+.action-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 25px var(--renk-vurgu);
+}

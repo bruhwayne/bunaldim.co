@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tetris Oyunu</title>
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="tetris-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Oyun Alanı -->
+        <div class="game-area">
+            <canvas id="tetris-board" width="300" height="600"></canvas>
+            
+            <div id="start-game-overlay" class="overlay">
+                <p>TETRIS</p>
+                <button id="start-button" class="restart-button">Oyuna Başla</button>
+            </div>
+
+            <div id="game-over-overlay" class="overlay hidden">
+                <p id="game-over-text">OYUN BİTTİ</p>
+                <button id="final-restart-button" class="restart-button">Tekrar Oyna</button>
+            </div>
+        </div>
+
+        <!-- MASAÜSTÜ ARAYÜZÜ -->
+        <div class="info-area">
+            <h1>TETRIS</h1>
+            <div class="stats-grid">
+                <div class="info-box"><h2>SKOR</h2><p id="score">0</p></div>
+                <div class="info-box"><h2>SEVİYE</h2><p id="level">1</p></div>
+            </div>
+            <div class="info-box"><h2>SONRAKİ</h2><canvas id="next-piece-canvas" width="120" height="120"></canvas></div>
+            <footer class="game-footer"><a href="../../index.html" class="back-link">Ana Sayfaya Dön</a></footer>
+        </div>
+
+        <!-- MOBİL "YÜZEN" ARAYÜZ -->
+        <div class="mobile-hud">
+            <div class="hud-top-bar">
+                <div class="hud-score-level"><span>Skor: <strong id="mobile-score">0</strong></span><span>Seviye: <strong id="mobile-level">1</strong></span></div>
+                <div class="hud-next-piece"><canvas id="mobile-next-canvas" width="40" height="40"></canvas></div>
+            </div>
+            <a class="mobile-restart-button restart-button hidden" title="Yeniden Başlat">🔄</a>
+        </div>
+    </div>
+    
+    <script src="tetris.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+    <footer class="mobile-footer"><a href="../../index.html" class="back-link">Ana Sayfaya Dön</a></footer>
+</body>
+</html>

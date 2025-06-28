@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Atari Salonu</title>
+    <link rel="stylesheet" href="../global-style.css">
+    <link rel="stylesheet" href="atari-style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body id="atari-page">
+    
+    <!-- Mobil Giriş Ekranı (Gatekeeper) -->
+    <div class="mobile-gate-overlay">
+        <span id="gate-icon">⟳</span>
+        <p id="gate-message">Daha iyi bir oyun deneyimi için<br>lütfen ekranınızı yan çevirin.</p>
+        <button id="gate-button" style="display: none;">TAM EKRANDA BAŞLAT</button>
+    </div>
+
+    <!-- DEĞİŞTİ: style="display: none;" kaldırıldı. JS zaten varsayılan olarak bunu gizleyip doğru zamanda gösterecek. -->
+    <main class="main-content">
+        <div id="emulator-container">
+            <canvas id="boot-canvas"></canvas>
+            <div id="game-holder" style="display: none; width: 100%; height: 100%;"></div>
+        </div>
+    </main>
+
+    <script src="atari.js"></script>
+    <script src="../global-script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    /* 
+       1. MERKEZLEME: Body'yi bir grid yapıyoruz ve içindeki TEK elementi
+       (page-wrapper) hem dikeyde hem yatayda mükemmel şekilde ortalıyoruz.
+    */
+    display: grid;
+    place-items: center;
+    padding: 1rem; /* Ekran kenarlarından güvenli boşluk */
+    
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+}
+
+/* 
+   PAGE-WRAPPER: Ekran görüntüsündeki her şeyin içinde durduğu ana kutu.
+*/
+.page-wrapper {
+    width: 100%;
+    /* 2. KÜÇÜK KARTLAR (Genel Boyut Kontrolü): Oyun kutusunun maksimum genişliği. */
+    max-width: 500px;
+    
+    background-color: var(--renk-ikincil-arkaplan);
+    border: 1px solid var(--renk-cerceve);
+    border-radius: 20px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+h1 { color: var(--renk-vurgu); margin: 0; font-size: 1.5rem; }
+.stats { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; }
+#restart-button { font-size: 0.9rem; padding: 0.6rem 1rem; border-radius: 8px; border: none; background-color: var(--renk-vurgu); color: white; cursor: pointer; }
+
+
+/* --- OYUN TAHTASI (En Kritik Kısım) --- */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* Kartlar arası boşluk */
+    gap: 6px;
+    /* Kartların şeklini (en/boy oranını) belirler */
+    aspect-ratio: 5 / 5;
+}
+
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+.card.flipped { transform: rotateY(180deg); }
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px; /* Daha yuvarlak köşeler */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 3. BÜYÜK İKONLAR: İkon boyutunu artırdık ve ekranla orantılı hale getirdik. */
+    font-size: clamp(2rem, 7vw, 3rem);
+}
+
+
+/* Kartların Renk ve Stilleri */
+.card-back { background-color: var(--renk-vurgu); }
+.card-front { background-color: var(--renk-arkaplan); transform: rotateY(180deg); }
+.card.matched {
+    opacity: 0.6;
+    transform: scale(0.95);
+    cursor: default;
+}
+.card.matched .card-front {
+    box-shadow: 0 0 10px var(--renk-basari);
+    border: 2px solid var(--renk-basari);
+}
+
+
+/* Alt Kısım */
+.win-message { text-align: center; padding-top: 1rem; color: var(--renk-basari); font-weight: bold; }
+.hidden { display: none !important; }
+.footer { text-align: center; margin-top: 2rem; }
+.back-link { color: var(--renk-soluk-yazi); }

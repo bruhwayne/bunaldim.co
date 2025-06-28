@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka Rüya Yorumlayıcısı</title>
+
+    <!-- Gerekli CSS dosyaları -->
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="ruya-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+
+    <div class="dream-container">
+        <div class="card">
+            <div class="card-header">
+                <img src="ruya-ikoni.svg" alt="Rüya İkonu" class="header-icon">
+                <h1>Rüya Yorumlayıcısı</h1>
+            </div>
+            <p class="subtitle">Gördüğün rüyayı anlat, yapay zeka bilinçaltındaki anlamları analiz etsin.</p>
+
+            <!-- Rüya girişi için metin alanı -->
+            <textarea id="dream-input" class="dream-textarea" placeholder="Örnek: Yüksek bir binanın tepesindeydim ve aşağıda bir okyanus vardı..."></textarea>
+            
+            <!-- Buton -->
+            <button id="interpret-dream-button" class="cta-button">Rüyamı Yorumla!</button>
+
+            <!-- Sonucun gösterileceği alan -->
+            <div id="result-container" class="result-container">
+                <p class="placeholder">Rüya yorumun burada belirecek.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gerekli JavaScript dosyaları -->
+    <script src="ruya-script.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

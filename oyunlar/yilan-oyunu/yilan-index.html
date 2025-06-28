@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Yılan Oyunu</title>
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="yilan-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <div class="page-container">
+        <header class="header">
+            <h1>Yılan Oyunu</h1>
+            <div class="score-container"><span>Skor:</span> <span id="score">0</span></div>
+        </header>
+
+        <main class="main-content">
+            <div class="board-container">
+                <canvas id="game-board"></canvas>
+                <div id="overlay" class="overlay">
+                    <p id="overlay-text"></p>
+                    <button id="restart-button" class="hidden">Başla</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p class="how-to-play">Oynamak için <strong>Yön Tuşlarını</strong> veya <strong>Ekranı Kaydırın</strong></p>
+            <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+        </footer>
+    </div>
+    
+    <script src="snake.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+
+    <footer class="mobile-footer">
+        <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+    </footer>
+
+</body>
+</html>

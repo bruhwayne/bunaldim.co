@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafıza Oyunu</title>
+    
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="hafiza-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <!-- Tüm oyunun içinde duracağı ana kutu -->
+    <div class="page-wrapper">
+        <header class="header">
+            <h1>Hafıza Oyunu</h1>
+            <div class="stats">
+                <span>Hamle: <strong id="moves-count">0</strong></span>
+                <button id="restart-button">Yeniden Başlat</button>
+            </div>
+        </header>
+
+        <!-- Kazanma mesajını oyun alanının dışına, ama ana kutunun içine alıyoruz -->
+        <div id="win-message" class="win-message hidden">
+            <p>Tebrikler, Kazandın!</p>
+        </div>
+
+        <main class="game-board"></main>
+
+        <footer class="footer">
+            <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+        </footer>
+    </div>
+    
+    <!-- Scriptler aynı kalıyor -->
+    <script src="hafiza.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

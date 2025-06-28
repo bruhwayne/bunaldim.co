@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kristal Küre</title>
+    
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="kure-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Kristal Küre</h1>
+            <p>Kaderini sorgulamaya cüretin var mı?</p>
+        </div>
+        
+        <div id="crystal-ball" class="crystal-ball-wrapper">
+            <div class="ball-glow"></div>
+            <img src="crystal-ball.png" alt="Kristal Küre" class="ball-image">
+            <div class="answer-area">
+                <p id="answer-text" aria-live="polite"></p>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="question-input" placeholder="Evrene bir soru fısılda...">
+            <button id="ask-button">Geleceği Gör</button>
+        </div>
+        
+        <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+    </div>
+
+    <script src="kurescript.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

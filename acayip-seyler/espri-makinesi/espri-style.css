@@ -1,0 +1,176 @@
+/* =================================================================== */
+/* ESPRİ MAKİNESİ STİLLERİ - AI SÜRÜMÜ (Sadeleştirilmiş)    */
+/* =================================================================== */
+
+
+/* ------------------------------------- */
+/* 1. TEMEL SAYFA DÜZENİ VE GENEL STİLLER  */
+/* ------------------------------------- */
+
+body {
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ------------------------------------- */
+/* 2. ANA KART VE İÇERİK STİLLERİ          */
+/* ------------------------------------- */
+
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+}
+.card {
+    background: var(--renk-ikincil-arkaplan);
+    border: 1px solid var(--renk-cerceve);
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--renk-vurgu);
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    color: var(--renk-soluk-yazi);
+    margin: 0 auto 2rem auto;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+/* ------------------------------------- */
+/* 3. ESPRİ KUTUSU VE BUTON               */
+/* ------------------------------------- */
+
+.joke-container {
+    position: relative; 
+    overflow: hidden;
+    background-color: var(--renk-arkaplan);
+    border-radius: 12px;
+    border-left: 5px solid var(--renk-vurgu);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.2s, border-left-color 0.2s;
+}
+
+#joke-text {
+    font-size: 1.25rem;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.6;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#get-joke-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--renk-vurgu);
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, filter 0.2s ease-in-out, background-color 0.2s;
+}
+#get-joke-button:hover:not(:disabled) {
+    transform: scale(1.08) translateY(-3px);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+#get-joke-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    filter: grayscale(50%);
+}
+
+/* ------------------------------------- */
+/* 4. YAN FOTOĞRAFLAR VE LİNKLER          */
+/* ------------------------------------- */
+
+.yan-fotograf {
+    max-width: 200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--renk-soluk-yazi);
+    text-decoration: none;
+}
+
+/* ------------------------------------- */
+/* 5. ANİMASYONLAR                      */
+/* ------------------------------------- */
+
+/* Yükleme animasyonu */
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--renk-vurgu);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.joke-container.loading #joke-text {
+    font-style: normal;
+    font-size: 1rem;
+    color: var(--renk-soluk-yazi);
+}
+
+/* ------------------------------------- */
+/* 6. MOBİL UYUMLULUK (RESPONSIVE)      */
+/* ------------------------------------- */
+
+@media (max-width: 1000px) {
+    .yan-fotograf { display: none; }
+    .main-wrapper { gap: 0; }
+}
+
+@media (max-width: 600px) {
+    body { padding: 1rem; }
+    h1 { font-size: 1.8rem; }
+    #joke-text { font-size: 1.1rem; }
+    #get-joke-button { font-size: 1rem; padding: 0.8rem 1.5rem; }
+}

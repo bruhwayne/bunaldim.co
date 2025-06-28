@@ -1,0 +1,16 @@
+#profile-page-body .page-container {
+    justify-content: flex-start; /* Sayfayı yukarıya hizala */
+}
+
+#profile-header h1 {
+    color: var(--renk-vurgu);
+    font-size: 2.2rem;
+    text-shadow: none; /* Ana sayfadaki parlama efektini kaldır */
+    margin-top: 2rem;
+}
+
+/* Profil sayfasındaki post kartlarının üzerine gelince hareket etmesini engelle */
+#profile-posts-container .post-card:hover {
+    transform: none;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+}

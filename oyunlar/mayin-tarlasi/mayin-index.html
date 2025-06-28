@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mayın Tarlası</title>
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="mayin-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <!-- Zorluk Seçim Ekranı -->
+    <div id="difficulty-selection" class="screen active">
+        <h1>Zorluk Seçin</h1>
+        <div class="difficulty-buttons">
+            <button class="difficulty-btn" data-difficulty="easy">Kolay <small>(10x10, 10 Mayın)</small></button>
+            <button class="difficulty-btn" data-difficulty="medium">Orta <small>(16x16, 40 Mayın)</small></button>
+            <button class="difficulty-btn" data-difficulty="hard">Zor <small>(20x20, 99 Mayın)</small></button>
+        </div>
+        <a href="../../index.html" class="back-link back-link-selection">Ana Sayfaya Dön</a>
+    </div>
+
+    <!-- Oyun Ekranı -->
+    <div id="game-wrapper" class="screen">
+        <div class="header">
+            <div id="mines-count-display">💣 --</div>
+            <div id="game-status">🤔</div>
+            <button id="restart-button" title="Yeniden Başlat">🔄</button>
+        </div>
+        <div class="board-wrapper">
+            <div id="board" class="board"></div>
+        </div>
+        <div class="footer-controls">
+             <button id="change-difficulty-button">Zorluk Değiştir</button>
+             <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script src="mayin.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

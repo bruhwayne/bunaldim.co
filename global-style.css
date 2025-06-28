@@ -1,0 +1,168 @@
+/* --- Global Kutu Modeli ve Temel Ayarlar --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    min-height: 100vh;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    width: 1200px;
+    height: 1200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: radial-gradient(circle, var(--renk-parlama) 0%, transparent 10%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- TEMA RENK DEĞİŞKENLERİ --- */
+:root {
+    --renk-arkaplan: #121212;
+    --renk-ikincil-arkaplan: #1e1e1e;
+    --renk-cerceve: #444;
+    --renk-yazi: #e0e0e0;
+    --renk-soluk-yazi: #aaa;
+    --renk-vurgu: #6366f1;
+    --renk-parlama: rgba(99, 102, 241, 0.15);
+    --renk-header-arkaplan: rgba(18, 18, 18, 0.7);
+}
+
+body.light-theme {
+    --renk-arkaplan: #f3f4f6;
+    --renk-ikincil-arkaplan: #ffffff;
+    --renk-cerceve: #e5e7eb;
+    --renk-yazi: #1f2937;
+    --renk-soluk-yazi: #6b7280;
+    --renk-vurgu: #4f46e5;
+    --renk-parlama: rgba(79, 70, 229, 0.15);
+    --renk-header-arkaplan: rgba(243, 244, 246, 0.7);
+}
+
+/* --- GLOBAL HEADER (Düzeltilmiş Kurallar) --- */
+.global-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--renk-header-arkaplan);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--renk-cerceve);
+    z-index: 1000;
+}
+
+.header-logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Logonun küçülmesini engeller */
+}
+
+.header-logo-icon {
+    height: 40px;
+    width: auto;
+}
+
+.header-actions {
+    display: flex; /* Butonları yatayda hizalamak için kritik kural */
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-bored-button {
+    background-color: var(--renk-vurgu);
+    color: white;
+    padding: 0.7rem 1.3rem;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    white-space: nowrap; /* "Bunaldım!" yazısının alt satıra kaymasını engeller */
+}
+.header-bored-button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.settings-menu-container {
+    position: relative;
+}
+
+.settings-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid var(--renk-cerceve);
+    color: var(--renk-yazi);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.settings-button:hover {
+    transform: scale(1.1) rotate(45deg);
+}
+
+.settings-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 200px;
+    background-color: var(--renk-ikincil-arkaplan);
+    border: 1px solid var(--renk-cerceve);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.settings-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-switcher-row {
+    display: flex; /* "Tema" yazısı ve ikonu yatayda hizalar */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.theme-switcher-row:hover {
+    background-color: rgba(128,128,128, 0.1);
+}
+.theme-switcher-row span {
+    font-weight: 500;
+}
+.theme-switcher-row .theme-icon {
+    font-size: 1.2rem;
+}
+
+body.has-global-header {
+    padding-top: 80px;
+}

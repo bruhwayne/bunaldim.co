@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hikaye Tamamlayıcı</title>
+
+    <!-- Gerekli CSS dosyaları -->
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="hikaye-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+
+    <div class="story-container">
+        <div class="card">
+            <div class="card-header">
+                <img src="hikaye-ikoni.svg" alt="Hikaye İkonu" class="header-icon">
+                <h1>Hikaye Tamamlayıcı</h1>
+            </div>
+            <p class="subtitle">Bir cümleyle başla, gerisini yapay zekanın hayal gücüne bırak.</p>
+
+            <!-- Hikaye başlangıcı için metin alanı -->
+            <textarea id="story-prompt" class="story-textarea" placeholder="Örnek: Karanlık ve fırtınalı bir gecede, eski malikanenin kapısı gıcırdayarak açıldı..."></textarea>
+            
+            <!-- Buton -->
+            <button id="complete-story-button" class="cta-button">Hikayeyi Tamamla!</button>
+
+            <!-- Sonucun gösterileceği alan -->
+            <div id="result-container" class="result-container">
+                <p id="result-text" class="placeholder">Hikayenin devamı burada belirecek.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gerekli JavaScript dosyaları -->
+    <script src="hikaye-script.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

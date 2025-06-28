@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI İsim Jeneratörü</title>
+    <!-- Gerekli stil dosyaları -->
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="generator-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <!-- YENİ: Sayfa içeriğini saran ana konteyner -->
+    <div class="generator-container">
+        <!-- YENİ: Tüm içeriği tutan kart -->
+        <div class="card">
+            <header class="header">
+                <h1>İsim Jeneratörü</h1>
+                <p class="subtitle">İlham alacağın bir kelime yaz, sana özel isimler üretelim.</p>
+            </header>
+
+            <main class="main-content">
+                <input type="text" id="name-input" class="name-input" placeholder="Bir karakter, oyun, film adı gir (örn: Legolas)">
+                <button id="generate-button" class="generate-button">İsim Üret</button>
+                <div id="result-box" class="result-box">
+                    <p class="placeholder">Öneriler burada listelenecek.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Gerekli script dosyaları -->
+    <script src="generator.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

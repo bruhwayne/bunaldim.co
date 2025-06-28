@@ -1,0 +1,85 @@
+body, html {
+    margin: 0; padding: 0;
+    width: 100vw; height: 100vh;
+    font-family: 'Press Start 2P', 'Poppins', sans-serif;
+    background: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    overflow: hidden;
+}
+
+/* YENİ: Başlangıçta ana içeriği CSS ile gizle. JS onu gösterecek. */
+.main-content {
+    display: none; /* JS bunu 'flex' olarak değiştirecek */
+    width: 100%; height: 100%;
+    justify-content: center; align-items: center;
+    padding: 1rem; box-sizing: border-box;
+}
+
+#emulator-container {
+    width: 100%; max-width: 1000px;
+    height: 90vh; max-height: 800px;
+    background: #000;
+    border: 5px solid var(--renk-cerceve);
+    border-radius: 8px;
+    position: relative; 
+    overflow: hidden;
+}
+
+#boot-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
+#game-holder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.fullscreen-button { position: absolute; bottom: 15px; right: 15px; width: 40px; height: 40px; background-color: rgba(0, 0, 0, 0.5); color: white; border: 2px solid rgba(255, 255, 255, 0.7); border-radius: 8px; cursor: pointer; z-index: 20; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; opacity: 0; transition: opacity 0.2s ease; user-select: none; }
+#emulator-container:hover .fullscreen-button { opacity: 1; }
+.fullscreen-button:hover { background-color: rgba(0, 0, 0, 0.8); }
+
+/* --- Mobil Giriş Ekranı (Gatekeeper) Stilleri --- */
+.mobile-gate-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    z-index: 2000;
+    display: none; /* YENİ: Varsayılan olarak gizli. JS gösterecek */
+    justify-content: center; align-items: center; flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+#gate-icon { font-size: 5rem; margin-bottom: 2rem; }
+#gate-message { font-size: 1.2rem; line-height: 1.8; }
+#gate-button {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.2rem;
+    background-color: var(--renk-vurgu);
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin-top: 2.5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+#gate-button:active { transform: scale(0.95); }
+
+/* Mobil Kontrol Butonları stilleri aynı */
+.mobile-controls { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 100; padding: 10px; box-sizing: border-box; display: none; justify-content: space-around; align-items: center; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); user-select: none; }
+body.is-mobile.gate-passed .mobile-controls { display: flex; }
+.mc-button { color: white; background-color: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 50%; width: 60px; height: 60px; font-size: 1.8rem; font-weight: bold; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+.mc-button#mc-select { width: 80px; height: 80px; font-size: 1.2rem; border-radius: 15px; }
+.mc-button:active { background-color: var(--renk-vurgu); transform: scale(0.95); }
+
+/* --- TAM EKRAN DÜZELTMELERİ --- */
+
+/* DEĞİŞTİRİLDİ: Bu kural, tam ekran olduğunda ana sarmalayıcının padding'ini kaldırır */
+main.main-content.no-padding {
+    padding: 0;
+}
+
+/* DEĞİŞTİRİLDİ: Bu kural, #emulator-container'a fullscreen class'ı eklendiğinde devreye girer */
+#emulator-container.is-fullscreen {
+    width: 100vw;       /* Genişliği tam ekran yapar */
+    height: 100vh;      /* Yüksekliği tam ekran yapar */
+    max-width: none;    /* Genişlik limitini kaldırır */
+    max-height: none;   /* Yükseklik limitini kaldırır */
+    border: none;       /* ÇERÇEVEYİ KALDIRIR */
+    border-radius: 0;   /* Yuvarlak köşeleri kaldırır */
+}

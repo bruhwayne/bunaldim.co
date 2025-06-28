@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kader Anı Hesaplayıcı</title>
+    
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="olum-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <div class="card">
+        <header class="card-header">
+            <h1>Kader Anı Hesaplayıcı</h1>
+            <p class="subtitle">Evrenin sırlarına kulak verin ve o 'an'ı (pek de ciddiye almadan) öğrenin!</p>
+        </header>
+        
+        <main class="card-body">
+            <div class="input-group">
+                <label for="birthdate-input">Doğum Tarihinizi Girin:</label>
+                <input type="date" id="birthdate-input">
+                <button id="calculate-btn">Kaderimi Hesapla</button>
+            </div>
+            
+            <div id="result-container" class="result-container hidden">
+                <h2>Kozmik Fısıltılar Diyor Ki:</h2>
+                <p id="result-text"></p>
+            </div>
+        </main>
+        
+        <footer class="card-footer">
+            <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+        </footer>
+    </div>
+    
+    <script src="olumscript.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+:root {
+    /* JS'nin bu değişkeni dinamik olarak (10, 16, 20) değiştirmesi, grid'in responsive olmasını sağlar */
+    --board-size: 10;
+    
+    /* MOBİL UYUMLULUK: Hücre boyutu, ekranın en dar kenarına göre (vmin) orantılı olacak.
+       calc() içindeki 5rem, üstteki ve alttaki boşluklar için bir pay bırakır. */
+    --cell-size: min( calc((95vmin - 5rem) / var(--board-size)), 45px );
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+    margin: 0; padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* TEMA UYUMLULUĞU: Tüm renkler değişkenlerden geliyor */
+    background: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    gap: 1.5rem;
+}
+
+.screen.active { display: flex; }
+
+/* Zorluk Seçim Ekranı Stilleri */
+#difficulty-selection h1 { margin-bottom: 1rem; font-size: clamp(1.8rem, 5vw, 2.5rem); }
+.difficulty-buttons { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+.difficulty-btn {
+    width: clamp(250px, 60vw, 300px);
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid var(--renk-cerceve);
+    border-radius: 12px;
+    background: var(--renk-ikincil-arkaplan);
+    color: var(--renk-yazi);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.difficulty-btn:hover { transform: scale(1.05); border-color: var(--renk-vurgu); }
+.difficulty-btn small { display: block; font-size: 0.8rem; color: var(--renk-soluk-yazi); margin-top: 4px; }
+.back-link-selection { margin-top: 2rem !important; }
+
+/* Oyun Ekranı Stilleri */
+.header {
+    width: 100%;
+    max-width: calc(var(--board-size) * (var(--cell-size) + 2px));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--renk-ikincil-arkaplan);
+    border: 1px solid var(--renk-cerceve);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+#mines-count-display, #game-status { font-size: clamp(1.2rem, 4vw, 1.5rem); }
+#restart-button {
+    font-size: 1.5rem; /* İkon olduğu için daha büyük */
+    background: none; border: none;
+    color: var(--renk-yazi); cursor: pointer; transition: transform 0.2s ease;
+}
+#restart-button:hover { transform: scale(1.2) rotate(90deg); }
+
+.board-wrapper { display: flex; justify-content: center; align-items: center; }
+.board {
+    display: grid;
+    grid-template-columns: repeat(var(--board-size), var(--cell-size));
+    grid-template-rows: repeat(var(--board-size), var(--cell-size));
+    gap: 2px;
+    padding: 5px;
+    background: var(--renk-cerceve);
+    border-radius: 8px;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background: var(--renk-ikincil-arkaplan);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(var(--cell-size) * 0.6);
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease;
+}
+
+/* Hücre Durumları */
+.cell:hover { background-color: var(--renk-cerceve); }
+.cell.revealed {
+    background: var(--renk-arkaplan);
+    cursor: default;
+}
+.cell.mine-hit { background: var(--renk-hata) !important; }
+.cell.flagged::before { content: '🚩'; font-size: calc(var(--cell-size) * 0.5); }
+.cell.mine::before { content: '💣'; }
+.cell.revealed:hover { background-color: var(--renk-arkaplan); } /* Açılmış hücrenin rengi değişmesin */
+
+/* Sayı Renkleri (Bunlar tema bağımsız, oyunun kendi kimliği) */
+[data-count="1"]{color:#2196f3} [data-count="2"]{color:#4caf50} [data-count="3"]{color:#f44336}
+[data-count="4"]{color:#9c27b0} [data-count="5"]{color:#ff9800} [data-count="6"]{color:#00bcd4}
+[data-count="7"]{color:#e91e63} [data-count="8"]{color:#795548}
+
+/* Alt Kontroller */
+.footer-controls { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+#change-difficulty-button {
+    padding: 0.7rem 1.5rem; font-size: 1rem; border-radius: 8px; border: none;
+    background: var(--renk-vurgu); color: #fff; cursor: pointer;
+}
+.back-link { color: var(--renk-soluk-yazi); text-decoration: none; }

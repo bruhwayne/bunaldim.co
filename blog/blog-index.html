@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BunaldımBlog</title>
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body id="blog-page-body">
+    <!-- KULLANICI BİLGİSİ ve ÇIKIŞ -->
+    <div id="user-info" class="user-info hidden">
+        <span id="user-display-name"></span>
+        <button id="logout-button">Çıkış Yap</button>
+    </div>
+
+    <div class="page-container">
+        <!-- GİRİŞ/KAYIT EKRANI (MODAL) -->
+        <div id="auth-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Giriş Yap</button>
+                    <button class="auth-tab" data-tab="register">Kayıt Ol</button>
+                </div>
+                <div class="auth-forms">
+                    <div id="login-view" class="auth-view active">
+                        <form id="login-form">
+                            <input type="email" id="login-email" placeholder="E-posta" required>
+                            <input type="password" id="login-password" placeholder="Şifre" required>
+                            <button type="submit">Giriş Yap</button>
+                            <a href="#" id="forgot-password-link" class="forgot-link">Şifremi unuttum</a>
+                        </form>
+                    </div>
+                    <div id="register-view" class="auth-view">
+                        <form id="register-form">
+                            <input type="text" id="register-username" placeholder="Kullanıcı Adı" required>
+                            <input type="email" id="register-email" placeholder="E-posta" required>
+                            <input type="password" id="register-password" placeholder="Şifre" required>
+                            <button type="submit">Kayıt Ol</button>
+                        </form>
+                    </div>
+                    <div id="reset-password-view" class="auth-view">
+                        <h2>Şifreni Sıfırla</h2>
+                        <form id="reset-password-form">
+                            <input type="email" id="reset-email" placeholder="E-posta" required>
+                            <button type="submit">Sıfırlama Linki Gönder</button>
+                        </form>
+                        <a href="#" id="back-to-login-link" class="back-link-small">Giriş ekranına dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANA SAYFA BAŞLIĞI -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title-with-icon">
+                    <img src="../../favicon.png" alt="logo" class="title-icon">
+                    <span>BunaldımBlog</span>
+                </h1>
+                <p class="subtitle">İçini dök, rahatla. Burası güvende.</p>
+            </div>
+        </header>
+
+        <!-- ANA İÇERİK BÖLÜMÜ -->
+        <main class="main-content">
+            <div id="verification-prompt" class="info-banner hidden">
+                <p>Kaydınız alındı! Lütfen hesabınızı doğrulamak için <strong>e-postanıza gönderilen linke</strong> tıklayın.</p>
+            </div>
+            
+            <div id="post-box" class="hidden">
+                <form id="post-form" class="post-form">
+                    <div class="textarea-wrapper">
+                        <span>Bunaldım, çünkü</span>
+                        <textarea id="message-input" placeholder="..." rows="3" required maxlength="300"></textarea>
+                    </div>
+                    <div id="char-counter" class="char-counter">300 karakter kaldı</div>
+                    <button type="submit" class="submit-button">Duvara Yaz</button>
+                </form>
+            </div>
+
+            <div id="auth-prompt">
+                <p>Gönderi yazmak veya etkileşimde bulunmak için lütfen giriş yapın.</p>
+                <button id="login-prompt-button" class="submit-button">Giriş Yap / Kayıt Ol</button>
+            </div>
+            
+            <div class="posts-area">
+                <div id="posts-container" class="posts-container"></div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+        </footer>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    
+    <!-- JavaScript Dosyaları -->
+    <script src="blog.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+
+    <!-- Yükleme Ekranı -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+</body>
+</html>

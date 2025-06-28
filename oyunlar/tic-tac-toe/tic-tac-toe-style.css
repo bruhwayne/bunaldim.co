@@ -1,0 +1,89 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.hidden { display: none !important; }
+
+/* --- Mod Seçim Ekranı --- */
+.selection-container { text-align: center; width: 100%;}
+.selection-container h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 2rem; color: var(--renk-yazi); }
+.mode-buttons-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+
+.mode-button {
+    width: clamp(160px, 40vw, 200px);
+    height: clamp(140px, 35vw, 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    padding: 1rem;
+    border-radius: 16px;
+    border: 2px solid var(--renk-cerceve);
+    cursor: pointer;
+    background-color: var(--renk-ikincil-arkaplan);
+    color: var(--renk-yazi);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.mode-button:hover { transform: translateY(-8px); border-color: var(--renk-vurgu); }
+.mode-button .icon { font-size: clamp(3rem, 10vw, 4rem); }
+.mode-button .text { font-size: clamp(1rem, 4vw, 1.1rem); }
+.back-link-selection { margin-top: 3rem !important; }
+
+/* --- Oyun Ekranı Stilleri --- */
+.game-container {
+    text-align: center;
+    background-color: var(--renk-ikincil-arkaplan);
+    padding: clamp(1rem, 5vw, 2rem) clamp(1.5rem, 5vw, 3rem);
+    border-radius: 12px;
+    width: fit-content;
+}
+#game-title { color: var(--renk-vurgu); }
+#status-text { margin-bottom: 1rem; height: 30px; color: var(--renk-soluk-yazi); transition: color 0.3s; }
+
+.board {
+    --cell-size: clamp(80px, 25vmin, 100px); /* MOBİL UYUMLULUK */
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell-size));
+    grid-template-rows: repeat(3, var(--cell-size));
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+.board.thinking { pointer-events: none; opacity: 0.7; }
+.board:not(.game-over) .cell:not(.x):not(.o):hover { background-color: var(--renk-cerceve); }
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: var(--renk-arkaplan);
+    border-radius: 5px;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; font-size: calc(var(--cell-size) * 0.6); font-weight: bold;
+    transition: background-color 0.2s;
+}
+.cell.x, .cell.o { cursor: not-allowed; }
+.cell.x { color: #f43f5e; }
+.cell.o { color: #3b82f6; }
+.cell.win { background-color: var(--renk-vurgu); }
+.cell.win .mark { color: white; }
+.cell .mark { animation: pop-in 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+@keyframes pop-in { from { transform: scale(0); } to { transform: scale(1); } }
+
+#controls-wrapper { margin-top: 1.5rem; height: 60px; }
+#end-game-controls { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; transition: opacity 0.4s ease-in-out; }
+#end-game-controls.invisible { opacity: 0; pointer-events: none; }
+#end-game-controls button {
+    font-size: 1rem; font-weight: 600; padding: 0.8rem 1.5rem; border-radius: 50px;
+    border: none; cursor: pointer; background-color: var(--renk-vurgu); color: white;
+}
+.back-link { display: block; margin-top: 1.5rem; color: var(--renk-soluk-yazi); text-decoration: none; }
+@media (min-width: 480px) {
+  #end-game-controls { flex-direction: row; }
+}

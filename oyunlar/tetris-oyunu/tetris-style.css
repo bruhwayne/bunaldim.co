@@ -1,0 +1,104 @@
+/* --- TEMEL YAPI --- */
+html{height:100%} body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:var(--renk-arkaplan);color:var(--renk-yazi);overflow:hidden;display:grid;place-items:center;padding:1rem;box-sizing:border-box}
+.container { display:flex; gap:2rem; align-items:flex-start; justify-content:center; }
+.hidden { display: none !important; }
+.restart-button{font-size:1.2rem;font-weight:600;padding:1rem 2rem;border-radius:50px;border:none;cursor:pointer;background-color:var(--renk-vurgu);color:white}
+
+
+/* --- OYUN ALANI ve EKRAN ÜSTÜ MESAJLAR (Overlay) --- */
+.game-area {
+    position: relative;
+    border:3px solid var(--renk-cerceve);
+    background-color: var(--renk-ikincil-arkaplan, #080808); 
+}
+#tetris-board { display:block; }
+.overlay {
+    position: absolute; top:0; left:0; width:100%; height:100%;
+    background: rgba(var(--renk-arkaplan-rgb,0,0,0), 0.85);
+    backdrop-filter: blur(5px);
+    display:flex; flex-direction: column; justify-content:center; align-items:center; gap: 1rem;
+    z-index: 10; text-align: center;
+}
+.overlay p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--renk-vurgu);
+}
+
+
+/* --- PC TASARIMI (VARSAYILAN) --- */
+.info-area{width:200px;text-align:center;display:flex;flex-direction:column;gap:1.5rem}
+.info-area h1{font-size:2.5rem;color:var(--renk-vurgu);margin:0}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.info-box{background-color:var(--renk-ikincil-arkaplan);padding:1rem;border-radius:8px;border:1px solid var(--renk-cerceve)}
+.info-box h2{margin:0 0 .5rem 0;font-size:1rem;color:var(--renk-soluk-yazi)}
+.info-box p{margin:0;font-size:2rem;font-weight:600}
+#next-piece-canvas{background-color:var(--renk-ikincil-arkaplan, #080808);border-radius:4px;margin:auto}
+.game-footer{margin-top:auto} .back-link{color:var(--renk-soluk-yazi);text-decoration:none}
+.mobile-hud { display: none; }
+
+
+/* ---- MOBİL TASARIM ---- */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        display: flex;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 4.5rem; 
+        padding-bottom: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .info-area { display: none; }
+
+    .game-area {
+        /* DÜZELTME: Genişlik, 0.7 ölçeğinde (95vw * 0.7) küçültüldü. */
+        width: 66.5vw; 
+        aspect-ratio: 1 / 2;
+        height: auto;
+        max-width: 450px;
+        margin: 0;
+        border-radius: 12px;
+        display: flex;
+    }
+
+    #tetris-board {
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile-hud {
+        display: block; position: fixed; top: 1.5rem; left: 0;
+        width: 100%; z-index: 5; pointer-events: none; box-sizing: border-box;
+    }
+    .hud-top-bar{pointer-events:all;display:flex;justify-content:space-between;align-items:center;background:rgba(var(--renk-arkaplan-rgb,0,0,0), .7);backdrop-filter:blur(5px);padding:.5rem .5rem .5rem 1rem;border-radius:12px;width:fit-content;margin:0 auto}
+    .hud-score-level{display:flex;gap:1rem;color:white;font-weight:600;font-size:0.9rem}
+    .hud-next-piece{width:40px;height:40px;background:transparent;border-radius:4px;margin-left:1rem}
+    .theme-switcher { z-index: 11 !important; }
+}
+/* --- Sadece mobil için Ana Sayfa Butonu --- */
+.mobile-footer {
+    display: none; /* Masaüstünde gizli */
+}
+
+@media (max-width: 768px) {
+    .mobile-footer {
+        display: block; /* Sadece mobilde görünür yap */
+        position: fixed;
+        bottom: 1.5rem;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 7;
+        pointer-events: all;
+    }
+}

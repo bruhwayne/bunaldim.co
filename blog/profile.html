@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Profili - BunaldımBlog</title>
+    <link rel="stylesheet" href="../../global-style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <link rel="stylesheet" href="profile-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body id="profile-page-body">
+    <div class="page-container">
+        <header id="profile-header" class="header">
+            <h1 id="profile-username">Yükleniyor...</h1>
+            <p class="subtitle">tarafından yazılan bunaltılar</p>
+        </header>
+
+        <main class="main-content">
+            <div class="posts-area">
+                <div id="profile-posts-container" class="posts-container">
+                    <p style="text-align: center;">Gönderiler yükleniyor...</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <a href="blog-index.html" class="back-link">Bunaldım Duvarı'na Dön</a>
+        </footer>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="profile.js" defer></script>
+</body>
+</html>

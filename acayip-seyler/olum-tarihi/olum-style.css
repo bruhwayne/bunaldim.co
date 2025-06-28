@@ -1,0 +1,124 @@
+/* Genel Sayfa Kurulumu */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: grid;
+    place-items: center; /* Kartı dikeyde ve yatayda mükemmel ortalar */
+    min-height: 100vh;
+    margin: 0;
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    background-color: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    background: var(--renk-ikincil-arkaplan);
+    border: 1px solid var(--renk-cerceve);
+    border-radius: 16px;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.card-header {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: var(--renk-vurgu);
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    color: var(--renk-soluk-yazi);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Form Elemanları */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+label {
+    font-weight: 600;
+}
+
+input[type="date"] {
+    background: var(--renk-arkaplan);
+    color: var(--renk-yazi);
+    border: 2px solid var(--renk-cerceve);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: inherit;
+    width: 80%;
+    max-width: 250px;
+    transition: border-color 0.2s;
+    text-align: center;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--renk-vurgu);
+}
+
+/* Ana Buton */
+#calculate-btn {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--renk-vurgu);
+    color: white;
+    width: calc(80% + 4px); /* Girdi ile aynı genişlikte */
+    max-width: calc(250px + 4px);
+    transition: transform 0.2s, filter 0.2s;
+}
+
+#calculate-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Sonuç Alanı */
+.result-container {
+    background: var(--renk-arkaplan);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 5px solid var(--renk-vurgu);
+    text-align: left;
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.result-container.hidden {
+    display: none;
+}
+
+.result-container h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--renk-soluk-yazi);
+}
+
+#result-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.card-footer {
+    margin-top: 2rem;
+}
+.back-link {
+    color: var(--renk-soluk-yazi);
+    text-decoration: none;
+}
