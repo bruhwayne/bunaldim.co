@@ -1,135 +1,106 @@
-// Gerekli DOM elementlerini seçiyoruz
-const questionContainer = document.getElementById('question-container');
-const resultScreen = document.getElementById('result-screen');
-const predictButton = document.getElementById('predict-button');
-const questionInput = document.getElementById('question-input');
-const backButton = document.getElementById('back-button');
-const predictionVideo = document.getElementById('prediction-video');
-const answerText = document.getElementById('answer-text');
+document.addEventListener('DOMContentLoaded', () => {
+    const questionInput = document.getElementById('question-input');
+    const askButton = document.getElementById('ask-button');
+    const crystalBall = document.getElementById('crystal-ball');
+    const answerText = document.getElementById('answer-text');
 
-// Olası kehanetler listesi
-const answers = [
-    "Kesinlikle evet.", "İşaretler eveti gösteriyor.", "Şüphesiz.",
-    "Evet, kesinlikle.", "Buna güvenebilirsin.", "Gördüğüm kadarıyla, evet.",
-    "Büyük olasılıkla.", "Görünüm iyi.", "Evet.", "Cevabım hayır.",
-    "Buna güvenme.", "Kaynaklarım hayır diyor.", "Pek iyi görünmüyor.",
-    "Çok şüpheli.", "Şimdi cevap vermek zor, tekrar dene.",
-    "Daha sonra tekrar sor.", "Şimdi söylemesem daha iyi.",
-    "Konsantre ol ve tekrar sor.", "Yıldızlar henüz hizalanmadı."
-];
+    let isLoading = false;
 
-// Animasyon döngüsü için bir değişken
-let animationFrameId = null;
+    // Metni kavisli bir şekilde gösteren fonksiyon (Mevcut haliyle harika çalışıyor)
+    function displayCurvedText(text) {
+        answerText.innerHTML = '';
+        const characters = text.split('');
+        const midIndex = (characters.length - 1) / 2;
+        const maxRotate = 40;
+        const maxTranslate = -25;
 
-// Kehanet fonksiyonunu tetikleyen olaylar
-predictButton.addEventListener('click', showPrediction);
-questionInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') showPrediction();
-});
-
-// Geri dönme olayını tetikleyen olay
-backButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    goBackToQuestion();
-});
-
-/**
- * Kehaneti gösterme fonksiyonu.
- * Ekran geçişini ve video oynatımını yönetir.
- */
-function showPrediction() {
-    if (questionInput.value.trim() === '') {
-        questionInput.style.borderColor = 'red';
-        setTimeout(() => { questionInput.style.borderColor = '#4b5563'; }, 1500);
-        return;
+        characters.forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char; // Boşlukları koru
+            const distanceFromCenter = (i - midIndex) / midIndex;
+            const rotateY = distanceFromCenter * maxRotate;
+            const translateY = (distanceFromCenter * distanceFromCenter) * maxTranslate;
+            span.style.setProperty('--transform', `translateY(${translateY}px) rotateY(${rotateY}deg)`);
+            span.style.transitionDelay = `${Math.abs(distanceFromCenter) * 0.15}s`;
+            answerText.appendChild(span);
+        });
     }
 
-    // Ekranları değiştir
-    questionContainer.classList.add('hidden'); // Soru ekranını gizle
-    resultScreen.classList.remove('hidden'); // Video ekranını göster
-    backButton.classList.remove('hidden');
-    
-    // Varsa önceki animasyon döngüsünü temizle
-    if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-    }
-    
-    // Video bittiğinde geri sarması için dinleyiciyi ayarla
-    predictionVideo.removeEventListener('ended', playReverse);
-    predictionVideo.addEventListener('ended', playReverse, { once: true }); // Sadece bir kez tetiklenir
-    
-    // Videoyu oynat
-    predictionVideo.currentTime = 0;
-    predictionVideo.play();
+    // Yapay zeka ile cevap üreten ana fonksiyon
+    const getCrystalBallAnswer = async () => {
+        if (isLoading) return;
+        
+        const question = questionInput.value.trim();
+        if (question.length < 5) {
+            displayCurvedText("Daha derin bir soru sor.");
+            answerText.classList.add('visible');
+            setTimeout(() => answerText.classList.remove('visible'), 2000);
+            return;
+        }
 
-    // Metni sıfırla ve gecikmeyle göster
-    answerText.textContent = '';
-    answerText.classList.remove('visible');
-    setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * answers.length);
-        const randomAnswer = answers[randomIndex];
-        typeWriter(randomAnswer, answerText);
-    }, 1500);
-}
+        isLoading = true;
+        askButton.disabled = true;
+        answerText.classList.remove('visible');
+        crystalBall.classList.add('thinking');
+        
+        // Yükleme animasyonunu göster
+        answerText.innerHTML = '<div class="spinner"></div>';
+        answerText.classList.add('visible');
 
-/**
- * Video bittiğinde, akıcı bir şekilde geri sarmak için animasyon döngüsünü başlatır.
- */
-function playReverse() {
-    const rewind = () => {
-        // Videoyu küçük adımlarla geri sar
-        predictionVideo.currentTime -= 0.033;
-        // Eğer başa dönmediyse, bir sonraki frame'i iste
-        if (predictionVideo.currentTime > 0) {
-            animationFrameId = requestAnimationFrame(rewind);
-        } else {
-            // Başa döndüyse, tekrar ileri oynat ve dinleyiciyi yeniden ekle
-            predictionVideo.currentTime = 0;
-            predictionVideo.play();
-            predictionVideo.addEventListener('ended', playReverse, { once: true });
+        try {
+            // GÜNCELLENDİ: Yapay zekaya daha bilge ve muzip bir kişilik veren yeni prompt
+            const prompt = `Sen, zamanın ötesinden fısıldayan, hem bilge hem de biraz muzip bir Kristal Küre'sin. Sana sorulan "${question}" sorusuna doğrudan cevap verme. Bunun yerine, metaforlar ve imalar kullanarak, kaderin cilvelerini yansıtan, üzerinde düşündürecek, gizemli ve şiirsel bir kehanette bulun. Cevabın kısa olsun, yaklaşık 7-10 kelimeden oluşsun. Cevabın sonunda asla nokta veya başka bir noktalama işareti kullanma.`;
+
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+            const apiKey = "AIzaSyD8_x8-_r2ysytJPvhfwO2Fh_XzwnC56go"; // API anahtarınızı buraya yapıştırın.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error("Evren şu an sessiz.");
+            }
+
+            const result = await response.json();
+            const aiAnswer = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+            
+            // Yükleme animasyonunu gizle
+            answerText.classList.remove('visible');
+            await new Promise(resolve => setTimeout(resolve, 500)); // Geçiş için bekle
+
+            if (aiAnswer) {
+                displayCurvedText(aiAnswer.trim());
+            } else {
+                displayCurvedText("Sisler dağılmadı.");
+            }
+
+        } catch (error) {
+            console.error("Kristal küre hatası:", error);
+            displayCurvedText(error.message);
+        } finally {
+            // Cevap gösterildikten sonra her şeyi sıfırla
+            crystalBall.classList.remove('thinking');
+            answerText.classList.add('visible');
+            questionInput.value = '';
+            
+            // Butonu tekrar aktif etmeden önce kısa bir bekleme
+            setTimeout(() => {
+                isLoading = false;
+                askButton.disabled = false;
+            }, 1000);
         }
     };
-    // Animasyon döngüsünü başlat
-    animationFrameId = requestAnimationFrame(rewind);
-}
 
-/**
- * Soru sorma ekranına geri dönme fonksiyonu.
- */
-function goBackToQuestion() {
-    resultScreen.classList.add('hidden');
-    questionContainer.classList.remove('hidden');
-    backButton.classList.add('hidden');
-    
-    // Tüm video işlemlerini durdur ve temizle
-    predictionVideo.pause();
-    if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-    }
-    predictionVideo.removeEventListener('ended', playReverse);
-    
-    // Sayfa durumunu sıfırla
-    predictionVideo.currentTime = 0;
-    answerText.textContent = '';
-    answerText.classList.remove('visible');
-    questionInput.value = '';
-}
-
-/**
- * Metni harf harf yazdıran "daktilo" efekti fonksiyonu.
- */
-function typeWriter(txt, element) {
-    let i = 0;
-    element.textContent = '';
-    element.classList.add('visible');
-    
-    function type() {
-        if (i < txt.length) {
-            element.textContent += txt.charAt(i);
-            i++;
-            setTimeout(type, 90);
+    askButton.addEventListener('click', getCrystalBallAnswer);
+    questionInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            getCrystalBallAnswer();
         }
-    }
-    type();
-}
+    });
+});

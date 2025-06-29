@@ -1,168 +1,144 @@
-/* Kristal Küre için özel stiller */
-:root {
-    --purple-glow: rgba(168, 85, 247, 0.7);
-}
-
 body {
-    background-color: #121212;
-    color: #ecf0f1;
-    overflow-x: hidden; /* Yatay kaydırmayı engelle */
-}
-
-/* Soru sorma ekranının container'ı */
-#question-container {
-    max-width: 800px;
-    margin: 4rem auto;
-    padding: 2rem;
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: opacity 0.5s, transform 0.5s;
-}
-
-#question-container.hidden {
-    opacity: 0;
-    transform: scale(0.9);
-    pointer-events: none;
-}
-
-/* Başlık alanı */
-.title-section {
+    font-family: 'Poppins', sans-serif; 
+    display: grid; 
+    place-items: center; 
+    min-height: 100vh;
+    padding: 1rem; 
+    box-sizing: border-box; 
     text-align: center;
-    margin-bottom: 2.5rem;
+    background: var(--renk-arkaplan); 
+    color: var(--renk-yazi); 
+    overflow: hidden;
+}
+.container { 
+    max-width: 500px; 
+    width: 100%; 
+}
+.header h1 { 
+    color: var(--renk-vurgu); 
+} 
+.header p { 
+    color: var(--renk-soluk-yazi); 
 }
 
-.title-section h1 {
-    font-size: 3.5rem;
-    color: var(--purple-glow);
-    text-shadow: 0 0 15px var(--purple-glow);
+/* KÜRE VE IŞIK EFEKTLERİ */
+.crystal-ball-wrapper { 
+    margin: 2rem 0; 
+    position: relative; 
+    display: grid; 
+    place-items: center; 
+}
+.ball-image { 
+    width: 100%; 
+    max-width: 350px; 
+    height: auto; 
+    z-index: 1; /* Parıltının arkasında kalması için */
 }
 
-.title-section p {
-    font-size: 1.2rem;
-    color: #bdc3c7;
-}
-
-/* Input ve Buton Alanı */
-#question-input {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 2px solid #4b5563;
-    background-color: #1f2937;
-    color: #e5e7eb;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#question-input:focus {
-    outline: none;
-    border-color: var(--purple-glow);
-    box-shadow: 0 0 15px var(--purple-glow);
-}
-
-.btn {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(45deg, #8b5cf6, #6366f1);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px var(--purple-glow);
-}
-
-.back-to-main {
-    display: block;
-    text-align: center;
-    margin-top: 1.5rem;
-    color: #9ca3af;
-    text-decoration: none;
-}
-
-/* Sonuç (Video) Ekranı - Tam ekran kaplama */
-#result-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s;
-}
-
-#result-screen:not(.hidden) {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-#prediction-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: cover;
-}
-
-#answer-text-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.ball-glow {
+    position: absolute; 
+    width: 100%; 
     height: 100%;
-    display: flex;
-    justify-content: center;
+    background: radial-gradient(circle, var(--renk-vurgu), transparent 70%);
+    animation: idle-glow 5s infinite ease-in-out;
+}
+@keyframes idle-glow { 
+    0%, 100% { opacity: 0.15; transform: scale(0.95); } 
+    50% { opacity: 0.2; transform: scale(1); } 
+}
+.crystal-ball-wrapper.thinking .ball-glow { 
+    animation: pulse-glow 1.5s ease-in-out forwards; 
+}
+@keyframes pulse-glow { 
+    0%, 100% { opacity: 0; } 
+    50% { opacity: 0.4; } 
+}
+
+/* YAZI STİLLERİ */
+.answer-area {
+    position: absolute; 
+    width: 70%; 
+    height: 70%; 
+    display: flex; 
+    justify-content: center; 
     align-items: center;
-    text-align: center;
-    padding: 2rem;
-    box-sizing: border-box;
+    perspective: 500px; 
+    transform-style: preserve-3d;
+    z-index: 2; /* Resmin önünde olması için */
 }
 
 #answer-text {
-    font-size: 2.2rem;
-    font-family: 'Georgia', serif;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0,0,0,0.7), 0 0 25px rgba(0,0,0,0.7), 0 0 40px var(--purple-glow);
+    display: flex;
     font-weight: bold;
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    color: white;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 0.5s ease;
 }
 
-#answer-text.visible {
+#answer-text.visible { 
+    opacity: 1; 
+}
+
+#answer-text span {
+    display: inline-block; 
+    min-width: 0.6ch;
+    transform: translateY(0px) rotateY(0deg) scale(0.5);
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+#answer-text.visible span {
     opacity: 1;
+    transform: var(--transform);
 }
 
-/* Geri Butonu */
-.back-button {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
-    background-color: rgba(31, 41, 55, 0.7);
-    color: #e5e7eb;
-    padding: 0.7rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    z-index: 1100; /* Video ekranının üzerinde kalmalı */
-    transition: all 0.3s ease;
+/* Yükleme durumu için spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* Yardımcı Sınıf */
-.hidden {
-    display: none !important;
+/* GİRİŞ ALANI */
+.input-area { 
+    display:flex; 
+    flex-direction:column; 
+    gap:1rem; 
+    align-items:center; 
+}
+#question-input { 
+    width: 90%; 
+    background: var(--renk-ikincil-arkaplan); 
+    border: 2px solid var(--renk-cerceve); 
+    border-radius: 8px; 
+    padding: 0.8rem; 
+    color: var(--renk-yazi); 
+    font-size: 1rem; 
+    text-align: center; 
+}
+#ask-button { 
+    width: 95%; 
+    background: var(--renk-vurgu); 
+    color: white; 
+    border: none; 
+    padding: 1rem; 
+    border-radius: 8px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+#ask-button:disabled { 
+    background-color: var(--renk-soluk-yazi); 
+    cursor: wait; 
+}
+.back-link { 
+    display: block; 
+    margin-top: 2rem; 
+    color: #777; 
+    text-decoration: none; 
 }
