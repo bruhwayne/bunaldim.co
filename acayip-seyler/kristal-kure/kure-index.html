@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kristal Küre</title>
-    
-    <link rel="stylesheet" href="../../global-style.css">
+    <title>Kristal Küre - Geleceği Sorgula</title>
+    <!-- Global stiller sitenin genel görünümü için eklendi -->
+    <link rel="stylesheet" href="../../global-style.css"> 
     <link rel="stylesheet" href="kure-style.css">
-    <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Kristal Küre</h1>
-            <p>Kaderini sorgulamaya cüretin var mı?</p>
-        </div>
-        
-        <div id="crystal-ball" class="crystal-ball-wrapper">
-            <div class="ball-glow"></div>
-            <img src="crystal-ball.png" alt="Kristal Küre" class="ball-image">
-            <div class="answer-area">
-                <p id="answer-text" aria-live="polite"></p>
-            </div>
-        </div>
+    <!-- Not: Sitenizin kendi global header'ı burada yer alacaktır. -->
 
-        <div class="input-area">
-            <input type="text" id="question-input" placeholder="Evrene bir soru fısılda...">
-            <button id="ask-button">Geleceği Gör</button>
+    <!-- Geri butonu -->
+    <a href="#" id="back-button" class="back-button hidden"><i class="fas fa-arrow-left"></i> Geri</a>
+
+    <!-- Soru sorma ekranı için ana container -->
+    <div id="question-container" class="container">
+        <div id="question-screen">
+            <div class="title-section">
+                <h1>Kristal Küre</h1>
+                <p>Kaderini sorgulamaya cüretin var mı?</p>
+            </div>
+
+            <main>
+                <div class="input-area">
+                    <input type="text" id="question-input" placeholder="Evrene bir soru fısılda...">
+                    <button id="predict-button" class="btn">Geleceği Gör</button>
+                </div>
+                 <a href="../../index.html" class="back-to-main">Ana Sayfaya Dön</a>
+            </main>
         </div>
-        
-        <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
     </div>
 
-    <script src="kurescript.js" defer></script>
-    <script src="../../global-script.js" defer></script>
+    <!-- Sonuç (Video) ekranı, başlangıçta gizli ve tam ekran kaplayacak -->
+    <div id="result-screen" class="hidden">
+        <video id="prediction-video" muted playsinline>
+            <source src="/acayip-seyler/kristal-kure/kristalkure.mp4" type="video/mp4">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <div id="answer-text-container">
+            <p id="answer-text"></p>
+        </div>
+    </div>
+    
+    <!-- Global script sitenin genel işlevselliği için eklendi -->
+    <script src="../../global-script.js"></script> 
+    <script src="kurescript.js"></script>
 </body>
 </html>
