@@ -1,7 +1,3 @@
-// ==========================================================
-// PROFILE.JS - ÇOKLU GÖNDERİ GÖSTERME HATASI DÜZELTİLDİ
-// ==========================================================
-
 document.addEventListener("DOMContentLoaded", () => {
     // --- FIREBASE KURULUMU ---
     const firebaseConfig = {
@@ -16,42 +12,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth(); // Auth servisini ekle
 
     if (document.body.id !== 'profile-page-body') return;
 
     // --- HTML ELEMANLARI ---
+    const profileCardEl = document.getElementById('profile-card');
+    const loadingProfileEl = document.getElementById('loading-profile');
     const profileUsernameEl = document.getElementById('profile-username');
+    const profileStatsEl = document.getElementById('profile-stats');
     const postsContainer = document.getElementById('profile-posts-container');
+    const userInfoEl = document.getElementById('user-info');
+    const userDisplayNameEl = document.getElementById('user-display-name');
+    const logoutButton = document.getElementById('logout-button');
+    const userProfileLink = document.getElementById('user-profile-link');
     
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('uid');
 
     if (!userId) {
-        profileUsernameEl.textContent = "Kullanıcı Bulunamadı";
-        postsContainer.innerHTML = '<p style="text-align:center;">Geçerli bir kullanıcı ID\'si belirtilmedi.</p>';
+        loadingProfileEl.innerHTML = '<p style="color:red;">Geçerli bir kullanıcı ID\'si belirtilmedi.</p>';
         return;
     }
 
-    // --- VERİ ÇEKME ---
+    // --- OTURUM YÖNETİMİ (SAĞ ÜST KÖŞE İÇİN) ---
+    auth.onAuthStateChanged(user => {
+        if (user && user.emailVerified) {
+            // Kullanıcı giriş yapmışsa header'daki bilgileri güncelle
+            userInfoEl.classList.remove('hidden');
+            userDisplayNameEl.textContent = user.displayName;
+            userProfileLink.href = `profile.html?uid=${user.uid}`;
+        } else {
+            // Kullanıcı giriş yapmamışsa header'da kullanıcı bilgisi gösterme
+            userInfoEl.classList.add('hidden');
+        }
+    });
+
+    logoutButton.addEventListener('click', () => {
+        auth.signOut().then(() => {
+            // Çıkış yapıldıktan sonra blog ana sayfasına yönlendir
+            window.location.href = 'blog-index.html';
+        });
+    });
+
+
+    // --- PROFİL VERİSİ ÇEKME VE SAYFAYI OLUŞTURMA ---
     db.collection('posts').where('userId', '==', userId).orderBy('timestamp', 'desc').get()
       .then(snapshot => {
+            loadingProfileEl.classList.add('hidden');
+            profileCardEl.classList.remove('hidden');
+
             if (snapshot.empty) {
-                profileUsernameEl.textContent = "Kullanıcı";
-                postsContainer.innerHTML = '<p style="text-align:center;">Bu kullanıcı henüz hiçbir şey yazmamış.</p>';
+                profileUsernameEl.textContent = "Bilinmeyen Kullanıcı";
+                postsContainer.innerHTML = '<p style="text-align:center; color: var(--renk-soluk-yazi);">Bu kullanıcı henüz hiçbir şey yazmamış.</p>';
+                profileStatsEl.innerHTML = `
+                    <div class="stat">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Gönderi</span>
+                    </div>
+                `;
                 return;
             }
             
-            profileUsernameEl.textContent = snapshot.docs[0].data().username; // İlk posttan kullanıcı adını al
-            postsContainer.innerHTML = ''; // "Yükleniyor" yazısını temizle
+            const postCount = snapshot.size;
+            const username = snapshot.docs[0].data().username;
             
-            // DÜZELTME: Her bir doküman için createProfilePostElement fonksiyonunu çağır.
+            profileUsernameEl.textContent = username;
+            profileStatsEl.innerHTML = `
+                <div class="stat">
+                    <span class="stat-value">${postCount}</span>
+                    <span class="stat-label">Gönderi</span>
+                </div>
+            `;
+
+            postsContainer.innerHTML = '';
             snapshot.forEach(doc => {
-                createProfilePostElement(doc.data()); // Her döngüde kendi verisini kullanır.
+                createProfilePostElement(doc.data());
             });
        })
        .catch(err => {
-            profileUsernameEl.textContent = "Hata";
-            postsContainer.innerHTML = '<p style="color:red;">Gönderiler yüklenemedi.</p>';
+            loadingProfileEl.innerHTML = `<p style="color:red;">Profil yüklenirken bir hata oluştu: ${err.message}</p>`;
             console.error("Profil sorgu hatası:", err);
        });
 

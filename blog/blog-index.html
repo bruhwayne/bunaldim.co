@@ -9,11 +9,6 @@
     <link rel="icon" type="image/png" href="../../favicon.png">
 </head>
 <body id="blog-page-body">
-    <!-- KULLANICI BİLGİSİ ve ÇIKIŞ -->
-    <div id="user-info" class="user-info hidden">
-        <span id="user-display-name"></span>
-        <button id="logout-button">Çıkış Yap</button>
-    </div>
 
     <div class="page-container">
         <!-- GİRİŞ/KAYIT EKRANI (MODAL) -->
@@ -55,11 +50,19 @@
         <!-- ANA SAYFA BAŞLIĞI -->
         <header class="header">
             <div class="header-content">
-                <h1 class="title-with-icon">
-                    <img src="../../favicon.png" alt="logo" class="title-icon">
-                    <span>BunaldımBlog</span>
-                </h1>
-                <p class="subtitle">İçini dök, rahatla. Burası güvende.</p>
+                <div class="title-container">
+                    <h1 class="title-with-icon">
+                        <img src="../../favicon.png" alt="logo" class="title-icon">
+                        <span>BunaldımBlog</span>
+                    </h1>
+                    <p class="subtitle">İçini dök, rahatla. Burası güvende.</p>
+                </div>
+                <div id="user-info" class="user-info hidden">
+                    <a href="#" id="user-profile-link" class="user-profile-link">
+                        <span id="user-display-name"></span>
+                    </a>
+                    <button id="logout-button">Çıkış Yap</button>
+                </div>
             </div>
         </header>
 
@@ -87,6 +90,8 @@
             
             <div class="posts-area">
                 <div id="posts-container" class="posts-container"></div>
+                <!-- SAYFALAMA KONTROLLERİ İÇİN YENİ ALAN -->
+                <div id="pagination-controls" class="pagination-controls"></div>
             </div>
         </main>
         

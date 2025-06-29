@@ -1,7 +1,3 @@
-// =====================================================================
-// BLOG.JS - GİRİŞ SONRASI MODAL KAPANMA HATASI DÜZELTİLDİ
-// =====================================================================
-
 document.addEventListener("DOMContentLoaded", () => {
     // --- FIREBASE KURULUMU ---
     const firebaseConfig = {
@@ -32,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageInput = document.getElementById("message-input");
     const loadingOverlay = document.getElementById("loading-overlay");
     const verificationPrompt = document.getElementById("verification-prompt");
+    const userInfoEl = document.getElementById('user-info');
+    const userDisplayNameEl = document.getElementById('user-display-name');
+    const userProfileLink = document.getElementById('user-profile-link');
+
 
     // --- TEMEL OLAY DİNLEYİCİLERİ ---
     loginPromptButton.addEventListener('click', () => authModal.classList.remove('hidden'));
@@ -51,17 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateUIVisibility(user) {
         const isLoggedIn = !!user;
         
-        // ==== DÜZELTME BURADA ====
-        // Giriş başarılı olduğunda, modal'ı otomatik olarak kapat ve formu sıfırla.
         if (isLoggedIn) {
             authModal.classList.add('hidden');
             loginForm.reset();
             registerForm.reset();
         }
-        // ==== DÜZELTME SONU ====
 
-        document.getElementById('user-info').classList.toggle('hidden', !isLoggedIn);
-        if(isLoggedIn) document.getElementById('user-display-name').textContent = user.displayName;
+        // Arayüzü güncelle
+        userInfoEl.classList.toggle('hidden', !isLoggedIn);
+        if(isLoggedIn) {
+            userDisplayNameEl.textContent = user.displayName;
+            userProfileLink.href = `profile.html?uid=${user.uid}`;
+        }
+        
         document.getElementById('post-box').classList.toggle('hidden', !isLoggedIn);
         document.getElementById('auth-prompt').classList.toggle('hidden', isLoggedIn);
         

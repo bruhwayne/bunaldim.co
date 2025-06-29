@@ -1,12 +1,115 @@
+/* ======================================================= */
+/* PROFİL SAYFASI - YENİ MODERN TASARIM                    */
+/* ======================================================= */
+
 #profile-page-body .page-container {
-    justify-content: flex-start; /* Sayfayı yukarıya hizala */
+    justify-content: flex-start;
+    padding-top: 2rem;
+    max-width: 900px;
 }
 
-#profile-header h1 {
+/* Yükleme Yazısı */
+.loading-text {
+    text-align: center;
+    padding: 4rem;
+    color: var(--renk-soluk-yazi);
+    font-size: 1.2rem;
+}
+
+/* Profil Kartı Ana Konteyner */
+.profile-card {
+    width: 100%;
+    background-color: var(--renk-ikincil-arkaplan);
+    border-radius: 12px;
+    border: 1px solid var(--renk-cerceve);
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2.5rem;
+    overflow: hidden; /* Banner resminin taşmasını önler */
+}
+
+/* Profil Kartı Banner */
+.profile-banner {
+    height: 150px;
+    background-color: var(--renk-vurgu);
+    background-image: linear-gradient(45deg, var(--renk-vurgu), #581c87);
+}
+
+/* Profil Kartı İçeriği */
+.profile-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem 1.5rem;
+    margin-top: -60px; /* Avatarın banner üzerine taşması için */
+    position: relative;
+    text-align: center;
+}
+
+/* Profil Avatar */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--renk-arkaplan);
+    border: 5px solid var(--renk-ikincil-arkaplan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar .fa-user {
+    font-size: 4rem;
     color: var(--renk-vurgu);
+}
+
+/* Profil Kullanıcı Adı */
+#profile-username {
     font-size: 2.2rem;
-    text-shadow: none; /* Ana sayfadaki parlama efektini kaldır */
-    margin-top: 2rem;
+    font-weight: 700;
+    color: var(--renk-yazi);
+    margin: 0;
+}
+
+/* Profil İstatistikleri */
+.profile-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    color: var(--renk-soluk-yazi);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--renk-yazi);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Gönderi Başlığı */
+.posts-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--renk-yazi);
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--renk-cerceve);
+    padding-bottom: 1rem;
+}
+
+/* Ana İçerik Alanı */
+#profile-page-body .main-content {
+    width: 100%;
 }
 
 /* Profil sayfasındaki post kartlarının üzerine gelince hareket etmesini engelle */
@@ -14,3 +117,49 @@
     transform: none;
     box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
 }
+
+/* Geri Dön Linki */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--renk-vurgu) !important;
+}
+
+/* Gizli sınıf */
+.hidden {
+    display: none !important;
+}
+
+/* --- SAYFALAMA STİLLERİ (YENİ) --- */
+.pagination-controls {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.load-more-button {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--renk-vurgu);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.load-more-button:hover:not(:disabled) {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+.load-more-button:disabled {
+    background-color: var(--renk-cerceve);
+    cursor: not-allowed;
+}
+

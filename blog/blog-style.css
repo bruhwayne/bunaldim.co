@@ -3,7 +3,7 @@
 /* ======================================================= */
 
 /* --- TEMEL SAYFA AYARLARI --- */
-body { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--renk-arkaplan); color: var(--renk-yazi); font-family: 'Poppins', sans-serif; line-height: 1.6; }
+body { display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 100vh; background-color: var(--renk-arkaplan); color: var(--renk-yazi); font-family: 'Poppins', sans-serif; line-height: 1.6; }
 .page-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 800px; padding: 2rem 1.5rem; box-sizing: border-box; gap: 2rem; }
 main.main-content { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 #post-box, .posts-area { width: 100%; max-width: 720px; }
@@ -17,16 +17,37 @@ main.main-content { width: 100%; display: flex; flex-direction: column; align-it
 
 /* --- YARDIMCI SINIF --- */
 .hidden { display: none !important; }
-/* --- BAŞLIK --- */
+/* --- BAŞLIK (ORTALAMA İÇİN GÜNCELLENDİ) --- */
 .header { width: 100%; text-align: center; }
+.header-content {
+    display: flex;
+    justify-content: center; /* Ortalamak için değiştirildi */
+    align-items: center;
+    width: 100%;
+    position: relative; /* Sağdaki kullanıcı bilgisi için eklendi */
+}
+.title-container {
+    text-align: center; /* Ortalamak için değiştirildi */
+}
 .subtitle { color: var(--renk-soluk-yazi); margin-top: 0.5rem; font-size: 1rem; }
-.title-with-icon { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin: 0; font-size: 2.5rem; font-weight: 700; color: var(--renk-vurgu); text-shadow: 0 0 10px var(--renk-vurgu); }
+.title-with-icon { display: flex; align-items: center; justify-content: center; /* Ortalamak için değiştirildi */ gap: 0.75rem; margin: 0; font-size: 2.5rem; font-weight: 700; color: var(--renk-vurgu); text-shadow: 0 0 10px var(--renk-vurgu); }
 .title-icon { height: 2.8rem; width: auto; vertical-align: middle; }
-/* --- KULLANICI BİLGİSİ --- */
-.user-info { position: absolute; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 1rem; padding: 0.5rem 1rem; background: var(--renk-ikincil-arkaplan); border: 1px solid var(--renk-cerceve); border-radius: 25px; z-index: 100; }
+
+/* --- KULLANICI BİLGİSİ ve ÇIKIŞ (ORTALAMA İÇİN GÜNCELLENDİ) --- */
+.user-info { display: flex; align-items: center; gap: 1rem; }
+.header .user-info {
+    position: absolute; /* Başlığa göre konumlandırmak için değiştirildi */
+    right: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+.user-profile-link { text-decoration: none; }
 #user-display-name { font-weight: 600; color: var(--renk-yazi); }
 #logout-button { background: transparent; border: 1px solid var(--renk-soluk-yazi); color: var(--renk-soluk-yazi); font-size: 0.9rem !important; padding: 0.4rem 0.8rem !important; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
 #logout-button:hover { background: var(--renk-vurgu); color: white; border-color: var(--renk-vurgu); }
+
 /* --- MODAL --- */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; }
 .modal-content { background: var(--renk-ikincil-arkaplan); width: 100%; max-width: 420px; padding: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--renk-cerceve); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); }
@@ -73,7 +94,7 @@ button[type="submit"]:hover, .submit-button:hover { filter: brightness(1.15); tr
 .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(18, 18, 18, 0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 9999; }
 .spinner { width: 50px; height: 50px; border: 5px solid var(--renk-cerceve); border-top: 5px solid var(--renk-vurgu); border-radius: 50%; animation: spin 1s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-/* --- YENİ EKLENEN STİLLER: BEĞENİ, YORUM VE YANITLAR --- */
+/* --- YORUM STİLLERİ --- */
 .post-actions { display: flex; align-items: center; gap: 0.75rem; }
 .like-button, .toggle-comments-button { display: flex; align-items: center; gap: 0.5rem; background: var(--renk-ikincil-arkaplan); border: 1px solid var(--renk-cerceve); color: var(--renk-yazi); font-weight: 600; cursor: pointer; padding: 0.4rem 0.8rem; font-size: 0.85rem; border-radius: 20px; transition: all 0.2s; }
 .like-button:hover, .toggle-comments-button:hover { background-color: var(--renk-vurgu); border-color: var(--renk-vurgu); color: white; }
@@ -96,40 +117,30 @@ button[type="submit"]:hover, .submit-button:hover { filter: brightness(1.15); tr
 .replies-container { margin-left: 20px; padding-left: 15px; border-left: 2px solid var(--renk-cerceve); display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
 .reply-form { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
 .no-comments { color: var(--renk-soluk-yazi); font-style: italic; font-size: 0.9rem; text-align: center; padding: 1rem; }
-/* Scrollbar */
-.comments-container::-webkit-scrollbar { width: 8px; }
-.comments-container::-webkit-scrollbar-track { background: var(--renk-ikincil-arkaplan); }
-.comments-container::-webkit-scrollbar-thumb { background: var(--renk-cerceve); border-radius: 4px; }
-.comments-container::-webkit-scrollbar-thumb:hover { background: var(--renk-vurgu); }
-
-.replies-container {
-    margin-top: 1rem;
-    padding-left: 15px;
-    border-left: 2px solid var(--renk-cerceve);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+/* --- SAYFALAMA STİLLERİ (YENİ) --- */
+.pagination-controls {
+    text-align: center;
+    margin-top: 2rem;
 }
 
-.comment-wrapper.is-reply {
-    font-size: 0.95em;
-}
-
-.comment-actions button {
-    font-size: 0.8em;
-    color: var(--renk-soluk-yazi);
-    background: none;
+.load-more-button {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
     border: none;
+    border-radius: 8px;
+    background: var(--renk-vurgu);
+    color: white;
     cursor: pointer;
-    padding: 0;
-}
-.comment-actions button:hover {
-    color: var(--renk-vurgu);
+    transition: all 0.2s ease-in-out;
 }
 
-.reply-form {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    padding-left: 1rem;
+.load-more-button:hover:not(:disabled) {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+.load-more-button:disabled {
+    background-color: var(--renk-cerceve);
+    cursor: not-allowed;
 }
