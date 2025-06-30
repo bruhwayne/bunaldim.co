@@ -1,0 +1,182 @@
+/* --- TEMEL YAPI --- */
+body {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- OYUN ALANI ve EKRAN ÜSTÜ MESAJLAR (Overlay) --- */
+.game-area {
+    position: relative;
+    border: 3px solid var(--renk-cerceve);
+    background-color: var(--renk-ikincil-arkaplan, #080808);
+    flex-shrink: 0;
+}
+
+#pongCanvas {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.9); /* global'deki --renk-arkaplan-rgb yerine direkt renk kullanımı */
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 10;
+    text-align: center;
+    padding: 1rem;
+}
+
+.overlay > p {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--renk-vurgu);
+    text-transform: uppercase;
+}
+
+.menu-button {
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    border: 2px solid var(--renk-vurgu);
+    cursor: pointer;
+    background-color: var(--renk-vurgu);
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+.menu-button:hover {
+    background-color: transparent;
+    color: var(--renk-vurgu);
+}
+.start-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+.controls-info {
+    font-size: 0.9rem;
+    color: var(--renk-soluk-yazi);
+    line-height: 1.5;
+}
+
+
+/* --- MASAÜSTÜ BİLGİ ALANI (Sağ Sütun) --- */
+.info-area {
+    width: 250px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-shrink: 0;
+}
+
+.info-area h1 {
+    font-size: 3rem;
+    color: var(--renk-vurgu);
+    margin: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.info-box {
+    background-color: var(--renk-ikincil-arkaplan);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--renk-cerceve);
+}
+
+.info-box h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--renk-soluk-yazi);
+    font-weight: 500;
+}
+
+.info-box p {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.score-p1 { color: var(--renk-vurgu); }
+.score-p2 { color: #ff6347; } /* İkinci oyuncu için belirgin bir renk */
+
+.controls-box .controls-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--renk-yazi);
+    text-align: left;
+}
+
+.game-footer {
+    margin-top: auto;
+}
+
+.back-link {
+    color: var(--renk-soluk-yazi);
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-link:hover {
+    color: var(--renk-vurgu);
+}
+
+
+/* --- MOBİL TASARIM --- */
+@media (max-width: 860px) {
+    body {
+        padding: 0;
+        display: flex;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 1rem;
+        padding-top: 80px; /* Global header yüksekliği */
+        width: 100%;
+        height: 100%;
+        justify-content: flex-start;
+    }
+
+    .info-area {
+        display: none; /* Mobilde sağ sütun gizlenir */
+    }
+
+    .game-area {
+        width: 100%;
+        max-width: 500px; /* Mobilde oyun alanının çok büyümesini engelle */
+    }
+}

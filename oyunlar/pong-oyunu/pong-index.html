@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pong Oyunu - bunaldim.co</title>
+    <!-- Sitenizin global stilleri -->
+    <link rel="stylesheet" href="../../global-style.css">
+    <!-- Bu sayfaya özel stiller -->
+    <link rel="stylesheet" href="pong-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Sol Taraf: Oyun Alanı -->
+        <div class="game-area">
+            <canvas id="pongCanvas" width="800" height="500"></canvas>
+            
+            <!-- Başlangıç Ekranı -->
+            <div id="startScreen" class="overlay">
+                <p>PONG</p>
+                <div class="start-controls">
+                    <p class="controls-info">1. Oyuncu: W / S Tuşları<br>2. Oyuncu: ↑ / ↓ Tuşları</p>
+                    <button id="playerVsCpuBtn" class="menu-button">Bilgisayara Karşı</button>
+                    <button id="playerVsPlayerBtn" class="menu-button">İki Kişilik</button>
+                </div>
+            </div>
+
+            <!-- Oyun Bitti Ekranı -->
+            <div id="endScreen" class="overlay hidden">
+                <p id="winnerText"></p>
+                <button id="restartBtn" class="menu-button">Tekrar Oyna</button>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Bilgi Alanı (Masaüstü için) -->
+        <div class="info-area">
+            <h1>PONG</h1>
+            <div class="stats-grid">
+                <div class="info-box">
+                    <h2>OYUNCU 1</h2>
+                    <p id="player1-score" class="score-p1">0</p>
+                </div>
+                <div class="info-box">
+                    <h2>OYUNCU 2</h2>
+                    <p id="player2-score" class="score-p2">0</p>
+                </div>
+            </div>
+            <div class="info-box controls-box">
+                 <h2>KONTROLLER</h2>
+                 <p class="controls-text">
+                    <strong>Oyuncu 1:</strong> W / S Tuşları<br>
+                    <strong>Oyuncu 2:</strong> ↑ / ↓ Tuşları
+                 </p>
+            </div>
+            <footer class="game-footer">
+                <a href="../../index.html" class="back-link">Ana Sayfaya Dön</a>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Script dosyaları -->
+    <script src="pongscript.js" defer></script>
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>
