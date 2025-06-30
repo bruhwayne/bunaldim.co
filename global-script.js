@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 '/acayip-seyler/sokak-gorunumu/sokak-index.html',
                 '/acayip-seyler/hikaye-tamamlayici/hikaye-index.html',
                 '/acayip-seyler/ruya-yorumlayici/ruya-index.html',
+                '/oyunlar/pong-oyunu/pong-index.html',
                 
             ];
             const currentPath = window.location.pathname;

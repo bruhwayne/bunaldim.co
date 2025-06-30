@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>bunaldım OS '98</title>
+    <!-- DÜZELTME: Global stil dosyası kaldırıldı. -->
+    <link rel="stylesheet" href="os-style.css">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body>
+    <!-- DÜZELTME: Global header kaldırıldı. -->
+    <div id="os-wrapper">
+        <!-- Ana Masaüstü Alanı -->
+        <div id="desktop">
+            <!-- Masaüstü İkonları -->
+            <div class="desktop-icon" data-opens="terminal-window" tabindex="0">
+                <img src="https://www.freeiconspng.com/uploads/command-prompt-icon-3.png" alt="Terminal ikonu">
+                <span>Terminal</span>
+            </div>
+            <div class="desktop-icon" data-opens="paint-window" tabindex="0">
+                <img src="https://cdn-icons-png.flaticon.com/512/3201/3201509.png" alt="Paint ikonu">
+                <span>Paint</span>
+            </div>
+            <div class="desktop-icon" data-opens="hakkinda-window" tabindex="0">
+                <img src="https://cdn-icons-png.flaticon.com/512/157/157933.png" alt="Bilgisayarım ikonu">
+                <span>Hakkında</span>
+            </div>
+
+            <!-- Terminal Penceresi -->
+            <div id="terminal-window" class="window hidden">
+                <div class="title-bar"><p>Terminal</p><div class="title-bar-controls"><button class="control-button maximize-btn" aria-label="Tam Ekran">□</button><button class="control-button close-btn" aria-label="Kapat">×</button></div></div>
+                <div class="window-body"><div id="terminal-body" class="terminal-body-content"></div><div class="terminal-input-area"><span class="prompt-arrow"> > </span><input type="text" class="terminal-input" autocomplete="off"></div></div>
+            </div>
+
+            <!-- Paint Penceresi -->
+            <div id="paint-window" class="window hidden" style="width: 500px; height: 400px;">
+                <div class="title-bar"><p>Paint</p><div class="title-bar-controls"><button class="control-button maximize-btn" aria-label="Tam Ekran">□</button><button class="control-button close-btn" aria-label="Kapat">×</button></div></div>
+                <div class="window-body paint-body">
+                    <div class="paint-toolbar">
+                        <div class="color-swatch active" style="background-color: black;" data-color="black"></div>
+                        <div class="color-swatch" style="background-color: red;" data-color="red"></div>
+                        <div class="color-swatch" style="background-color: blue;" data-color="blue"></div>
+                        <div class="color-swatch" style="background-color: green;" data-color="green"></div>
+                        <div class="color-swatch" style="background-color: yellow;" data-color="yellow"></div>
+                        <button id="ai-paint-btn" class="ai-button">AI Dönüştür</button>
+                    </div>
+                    <canvas id="paint-canvas"></canvas>
+                </div>
+            </div>
+            
+            <!-- Hakkında Penceresi -->
+            <div id="hakkinda-window" class="window hidden" style="width: 400px; height: 250px;">
+                <div class="title-bar"><p>Hakkında: bunaldım OS '98</p><div class="title-bar-controls"><button class="control-button maximize-btn" aria-label="Tam Ekran">□</button><button class="control-button close-btn" aria-label="Kapat">×</button></div></div>
+                <div class="window-body hakkinda-body"><img src="../../favicon.png" alt="OS Logosu" style="width: 64px; float: left; margin-right: 15px;"><h3>bunaldım OS '98</h3><p>Versiyon 1.0</p><p>bunaldim.co için Gemini tarafından geliştirilmiştir.</p><p>Bu arayüz, nostaljiyi sevenler için tasarlanmış basit bir işletim sistemi simülasyonudur.</p></div>
+            </div>
+            
+            <!-- AI Sonuç Penceresi -->
+            <div id="ai-result-window" class="window hidden" style="width: 550px; height: 600px;">
+                 <div class="title-bar"><p>AI Tarafından Oluşturulan Görsel</p><div class="title-bar-controls"><button class="control-button close-btn" aria-label="Kapat">×</button></div></div>
+                 <div class="window-body ai-result-body">
+                    <p id="ai-prompt-display"></p>
+                    <img id="ai-generated-image" src="" alt="AI Tarafından Oluşturulan Görsel">
+                 </div>
+            </div>
+
+        </div>
+
+        <!-- Görev Çubuğu -->
+        <div id="taskbar">
+            <button id="start-button"><img src="../../favicon.png" alt="Başlat Logosu"><strong>bunaldım</strong></button>
+            <div id="start-menu" class="hidden">
+                <div class="start-menu-side-bar">bunaldım <span>OS</span></div>
+                <ul>
+                    <li data-opens="paint-window"><img src="https://cdn-icons-png.flaticon.com/512/3201/3201509.png" alt="Paint ikonu"><span>Paint</span></li>
+                    <li data-opens="terminal-window"><img src="https://www.freeiconspng.com/uploads/command-prompt-icon-3.png" alt="Terminal ikonu"><span>Terminal</span></li>
+                    <hr>
+                    <li data-opens="hakkinda-window"><img src="https://cdn-icons-png.flaticon.com/512/157/157933.png" alt="Hakkında ikonu"><span>Hakkında</span></li>
+                </ul>
+            </div>
+            <div id="taskbar-clock"></div>
+        </div>
+
+        <!-- Yükleme Göstergesi -->
+        <div id="loading-overlay" class="hidden">
+            <div class="loading-spinner"></div>
+            <p>Yapay zeka düşünüyor...</p>
+        </div>
+    </div>
+
+    <!-- Tam Ekran Butonu -->
+    <button id="fullscreen-toggle" aria-label="Tam Ekran Yap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+    </button>
+    
+    <!-- Script dosyaları -->
+    <script src="os-script.js" defer></script>
+    <!-- DÜZELTME: Sadece tema için gerekli global script'i çağırıyoruz. -->
+    <script src="../../global-script.js" defer></script>
+</body>
+</html>
